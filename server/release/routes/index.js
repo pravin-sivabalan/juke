@@ -1,0 +1,11 @@
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import { AuthController } from '../controller/index';
+import { TrackController } from '../controller/index';
+export let app = express();
+app.use(bodyParser.json());
+app.get('/tracks/:id', TrackController.getTracks);
+app.post('/tracks/:id', TrackController.postTrack);
+app.delete('/tracks/:id', TrackController.deleteTrack);
+app.get('/auth/spotify', AuthController.redirectToAuth);
+app.get('/auth/spotify/callback', AuthController.sucessAuth);
