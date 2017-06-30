@@ -1,0 +1,9 @@
+<input (keyup)="searchTerm$.next($event.target.value)">
+<ul *ngIf="results">
+  <li *ngFor="let result of results | slice:0:9">
+    <a href="{{ result.external_urls.spotify }}" target="_blank">
+      {{ result.name }} by {{ result.album.artists[0].name }}
+    </a>
+    <button (click)="postTrack()">+</button>
+  </li>
+</ul>
