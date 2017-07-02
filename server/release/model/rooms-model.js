@@ -1,6 +1,8 @@
-import * as mongoose from 'mongoose';
-export const RoomSchema = new mongoose.Schema({
-    admin: {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose = require("mongoose");
+exports.RoomSchema = new mongoose.Schema({
+    room: {
         type: String,
         required: true
     },
@@ -16,4 +18,4 @@ export const RoomSchema = new mongoose.Schema({
         type: String,
     }
 });
-export const Room = mongoose.model('Room', RoomSchema, 'room');
+exports.Room = mongoose.model('Room', exports.RoomSchema, 'room');

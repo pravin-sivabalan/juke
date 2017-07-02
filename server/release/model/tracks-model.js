@@ -1,6 +1,8 @@
-import * as mongoose from 'mongoose';
-export const TrackSchema = new mongoose.Schema({
-    admin: {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose = require("mongoose");
+exports.TrackSchema = new mongoose.Schema({
+    room: {
         type: String,
         required: true
     },
@@ -30,4 +32,4 @@ export const TrackSchema = new mongoose.Schema({
         required: true
     }
 });
-export const Track = mongoose.model('Track', TrackSchema, 'track');
+exports.Track = mongoose.model('Track', exports.TrackSchema, 'track');
