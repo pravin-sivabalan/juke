@@ -11,7 +11,7 @@ export interface ITrack extends mongoose.Document{
 }
 
 export const TrackSchema: mongoose.Schema = new mongoose.Schema({
-  admin: {
+  room: {
     type: String,
     required: true
   },

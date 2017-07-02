@@ -8,7 +8,7 @@ export interface IRoom extends mongoose.Document{
 }
 
 export const RoomSchema: mongoose.Schema = new mongoose.Schema({
-  admin: {
+  room: {
     type: String,
     required: true
   },
