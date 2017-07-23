@@ -1,0 +1,8 @@
+<form>
+  <input (keyup)="searchTerm$.next($event.target.value)" type="text" [mdAutocomplete]="auto">
+  <md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let result of results | slice:0:9" [value]="state" (click)="postTrack(result)">
+      {{ result.name }} by {{ result.artists[0].name }} {{ isExplicit(result.explicit) }}
+    </md-option>
+  </md-autocomplete>
+</form>

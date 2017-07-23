@@ -1,0 +1,13 @@
+<div *ngFor="let track of tracks" class="card flex-container">
+    <img class="item1" unselectable="on" src="{{track.albumArt}}">
+    <div class="item2">
+      <h3>{{track.title}}</h3>
+      <h4>{{track.albumName}}</h4>
+      <p>By {{track.artist}}</p>
+    </div>
+    <div class="votes item3">
+      <a (click)="upVote(track)"><i [ngClass]="{'up disabled': track.upVoted, 'inactive': !track.upVoted}" class="fa fa-arrow-up" aria-hidden="true"></i></a>
+      <h5 unselectable="on">{{track.votes}}</h5>
+      <a (click)="downVote(track)"><i class="loading" [ngClass]="{'down disabled': track.downVoted, 'inactive': !track.downVoted, 'disabled': track.votes == 0}" class="fa fa-arrow-down" aria-hidden="true"></i></a>
+    </div>
+</div>

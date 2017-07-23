@@ -1,0 +1,263 @@
+img {
+  vertical-align: middle;
+  margin-right: 1rem;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+h3 {
+  font-size: 1.7rem;
+  padding-top: 1rem;
+  color: #212121;
+}
+
+h4 {
+  padding-top: 0.5rem;
+  font-size: 1rem;
+  color: #5b5b5b;
+}
+
+h5 {
+  font-size: 1.3rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
+
+p {
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #353535;
+}
+
+.up {
+  color: #58b555;
+}
+
+.down {
+  color: red;
+}
+
+.inactive {
+  color: #e5e5e5;
+}
+
+.disabled {
+   pointer-events: none;
+   cursor: not-allowed;
+}
+
+.fa {
+  font-size: 1.7rem;
+}
+
+.card {
+  width: 90%;
+  border: 0.001px solid #d3d3d3;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+  margin: auto;
+  margin-top: 3rem;
+}
+
+.flex-container {
+   display: -webkit-flex;
+   display: flex;
+}
+
+.votes {
+  margin: auto;
+  width: 50;
+  text-align: center;
+}
+
+.item1 {
+  flex: 1;
+  max-width: 40%;
+  height: 8rem;
+}
+
+.item2 {
+  flex: 5;
+}
+
+.item3 {
+  flex: 1.7;
+  border-left: thin double #b7b7b7;
+}
+
+.loading {
+  -moz-transition:all 0.5s ease-in-out;
+  -webkit-transition:all 0.5s ease-in-out;
+  -o-transition:all 0.5s ease-in-out;
+  -ms-transition:all 0.5s ease-in-out;
+  transition:all 0.5s ease-in-out;
+  -moz-animation:blink normal 1.5s infinite ease-in-out;
+  -webkit-animation:blink normal 1.5s infinite ease-in-out;
+  -ms-animation:blink normal 1.5s infinite ease-in-out;
+  animation:blink normal 1.5s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0% {
+           background-color: rgba(255,0,0,1)
+    }
+    50% {
+           background-color: rgba(255,0,0,0.5)
+    }
+    100% {
+           background-color: rgba(255,0,0,1)
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+           background-color: rgba(255,0,0,1)
+    }
+    50% {
+           background-color: rgba(255,0,0,0.5)
+    }
+    100% {
+           background-color: rgba(255,0,0,1)
+    }
+}
+
+@media (min-width:641px) {
+  img {
+    margin-right: 1.5rem;
+  }
+  .card {
+    width: 90%;
+  }
+  h3 {
+    padding-top: 1.5rem;
+    font-size: 2rem;
+  }
+  .item1 {
+    height: 9rem;
+  }
+  h4 {
+    padding-top: 0.8rem;
+    font-size: 1rem;
+  }
+  h5 {
+    font-size: 1.7rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  p {
+    padding-top: 0.8rem;
+    font-size: 1.1rem;
+  }
+  .fa {
+    font-size: 2.5rem;
+  }
+  .item3 {
+    flex: 1;
+  }
+}
+@media (min-width:961px) {
+  .card {
+    width: 80%;
+  }
+  h3 {
+    padding-top: 0.8rem;
+    font-size: 3rem;
+  }
+  .item1 {
+    height: 9rem;
+  }
+  h4 {
+    padding-top: 0.8rem;
+    font-size: 1.2rem;
+  }
+  h5 {
+    font-size: 1.7rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  p {
+    padding-top: 0.8rem;
+    font-size: 1.4rem;
+  }
+  .fa {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width:1025px) {
+  .card {
+    width: 60%;
+  }
+  h3 {
+    padding-top: 0.8rem;
+    font-size: 3rem;
+  }
+  .item1 {
+    height: 9rem;
+  }
+  h4 {
+    padding-top: 0.8rem;
+    font-size: 1.2rem;
+  }
+  h5 {
+    font-size: 1.7rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+  p {
+    padding-top: 0.8rem;
+    font-size: 1.4rem;
+  }
+  .fa {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width:1281px) {
+  .card {
+    width: 60%;
+  }
+  h3 {
+    padding-top: 1rem;
+    font-size: 3rem;
+  }
+  .item1 {
+    height: 10rem;
+  }
+  h4 {
+    padding-top: 0.8rem;
+    font-size: 1.2rem;
+  }
+  h5 {
+    font-size: 1.7rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  p {
+    padding-top: 0.8rem;
+    font-size: 1.4rem;
+  }
+  .fa {
+    font-size: 2.7rem;
+  }
+}

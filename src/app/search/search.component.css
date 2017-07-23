@@ -1,0 +1,13 @@
+form {
+  text-align: center;
+  padding-top: 5rem;
+}
+
+input {
+  width: 70%;
+  padding: 0.8rem;
+}
+
+input:focus {
+  outline: none;
+}

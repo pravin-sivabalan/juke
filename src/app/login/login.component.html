@@ -1,0 +1,9 @@
+<button *ngIf="!loggingIn" (click)="login()">Create Room</button>
+<div *ngIf="loggingIn">
+  <p>Room: </p>
+  <input #room>
+  <p>Username: </p>
+  <input #username>
+  <br>
+  <button (click)="submit(room.value, username.value)">Login</button>
+</div>
