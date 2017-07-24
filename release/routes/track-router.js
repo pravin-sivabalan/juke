@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = require("express");
 var _ = require("lodash");
+var express = require("express");
 var socket_1 = require("../socket");
 var index_1 = require("../models/index");
 exports.track = express();

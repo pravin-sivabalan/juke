@@ -4,6 +4,7 @@ import * as session from 'express-session';
 import { Express } from 'express';
 import { auth } from './auth-router';
 import { track } from './track-router';
+import { player } from './player-router';
 import { properties } from '../utils/properties';
 let MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', auth);
 app.use('/api/tracks', track);
+app.use('/api/player', player);
 
 app.get('/api/test', function(req, res) {
   res.send('Hello ' + JSON.stringify(req.session));

@@ -1,4 +1,5 @@
-<button *ngIf="!loggingIn" (click)="login()">Create Room</button>
+<button *ngIf="!loggingIn" (click)="login('create')">Create Room</button>
+<button *ngIf="!loggingIn" (click)="login('join')">Join Room</button>
 <div *ngIf="loggingIn">
   <p>Room: </p>
   <input #room>

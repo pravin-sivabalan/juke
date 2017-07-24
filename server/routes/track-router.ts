@@ -1,5 +1,5 @@
-import * as express from 'express';
 import * as _ from 'lodash';
+import * as express from 'express';
 import { socket } from '../socket';
 import { Express, Request, Response } from 'express';
 import { ITrack, TrackSchema, Track } from '../models/index';

@@ -4,6 +4,7 @@
       <h3>{{track.title}}</h3>
       <h4>{{track.albumName}}</h4>
       <p>By {{track.artist}}</p>
+      <button (click)="play(track.uri)">Play</button>
     </div>
     <div class="votes item3">
       <a (click)="upVote(track)"><i [ngClass]="{'up disabled': track.upVoted, 'inactive': !track.upVoted}" class="fa fa-arrow-up" aria-hidden="true"></i></a>

@@ -10,6 +10,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loggingIn: boolean;
+  isCreating: boolean;
+  isJoining: boolean;
 
   constructor(private router: Router, private authService: AuthService) {
     this.loggingIn = false;
@@ -18,13 +20,22 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  login(action: string) {
     this.loggingIn = true;
+    if(action == 'join') {
+      this.isJoining = true;
+    } else if(action == 'create') {
+      this.isCreating = true;
+    }
   }
 
   submit(room: string, username: string) {
-    this.authService.joinRoom(room, username);
-    this.router.navigate(['/dash']);
+    if(this.isJoining) {
+      this.authService.joinRoom(room, username);
+      this.router.navigate(['/dash']);
+    } else if(this.isCreating) {
+      window.location.href='/api/auth/create?room=' + room + '&username=' + username;
+    }
   }
 
 }

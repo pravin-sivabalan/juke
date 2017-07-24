@@ -5,24 +5,45 @@ var request = require("request");
 var properties_1 = require("../utils/properties");
 exports.auth = express();
 exports.auth.get('/refresh', function (req, res) {
-    var options = {
-        url: 'https://accounts.spotify.com/api/token',
-        method: 'POST',
-        form: {
-            'grant_type': 'client_credentials'
-        },
-        headers: {
-            'Authorization': 'Basic ' + properties_1.properties.externalServices.spotify.base64
-        }
-    };
-    request.post(options, function (error, response, body) {
-        if (error)
-            return res.sendStatus(500);
-        if (response.statusCode != 200)
-            return res.sendStatus(500);
-        res.cookie('access_token', JSON.parse(body).access_token);
-        res.sendStatus(200);
-    });
+    if (req.session.refresh_token) {
+        var options = {
+            url: 'https://accounts.spotify.com/api/token',
+            form: {
+                'grant_type': 'refresh_token',
+                'refresh_token': req.session.refresh_token
+            },
+            headers: {
+                'Authorization': 'Basic ' + properties_1.properties.externalServices.spotify.base64
+            }
+        };
+        request.post(options, function (error, response, body) {
+            if (error)
+                return res.sendStatus(500);
+            if (response.statusCode != 200)
+                return res.sendStatus(500);
+            res.cookie('access_token', JSON.parse(body).access_token);
+            return res.sendStatus(200);
+        });
+    }
+    else {
+        var options = {
+            url: 'https://accounts.spotify.com/api/token',
+            form: {
+                'grant_type': 'client_credentials'
+            },
+            headers: {
+                'Authorization': 'Basic ' + properties_1.properties.externalServices.spotify.base64
+            }
+        };
+        request.post(options, function (error, response, body) {
+            if (error)
+                return res.sendStatus(500);
+            if (response.statusCode != 200)
+                return res.sendStatus(500);
+            res.cookie('access_token', JSON.parse(body).access_token);
+            return res.sendStatus(200);
+        });
+    }
 });
 exports.auth.post('/join', function (req, res) {
     var body = req.body;
@@ -32,4 +53,30 @@ exports.auth.post('/join', function (req, res) {
     req.session.username = req.body.username;
     req.session.room = req.body.room;
     return res.json(204);
+});
+exports.auth.get('/create', function (req, res) {
+    if (!req.query.username || !req.query.room)
+        return res.sendStatus(400);
+    req.session.username = req.query.username;
+    req.session.room = req.query.room;
+    return res.redirect('https://accounts.spotify.com/authorize?client_id=' + properties_1.properties.externalServices.spotify.client_id + '&response_type=code&redirect_uri=' + properties_1.properties.externalServices.spotify.callback + '&scope=user-modify-playback-state');
+});
+exports.auth.get('/callback', function (req, res) {
+    var options = {
+        url: 'https://accounts.spotify.com/api/token',
+        form: {
+            'grant_type': 'authorization_code',
+            'code': req.query.code,
+            'redirect_uri': properties_1.properties.externalServices.spotify.callback
+        },
+        headers: {
+            'Authorization': 'Basic ' + properties_1.properties.externalServices.spotify.base64
+        }
+    };
+    request.post(options, function (error, response, body) {
+        body = JSON.parse(body);
+        req.session.refresh_token = body.refresh_token;
+        res.cookie('access_token', req.session.access_token);
+        return res.redirect('/dash');
+    });
 });

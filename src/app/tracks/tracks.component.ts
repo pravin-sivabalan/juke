@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrackService } from '../shared/services/track.service';
+import { PlayerService } from '../shared/services/player.service';
 import { Track } from '../shared/model/track';
 import io from 'socket.io-client';
 
@@ -7,12 +8,12 @@ import io from 'socket.io-client';
   selector: 'tracks',
   templateUrl: './tracks.component.html',
   styleUrls: ['./tracks.component.css'],
-  providers: [TrackService]
+  providers: [TrackService, PlayerService]
 })
 export class TracksComponent implements OnInit {
   tracks: Track[];
 
-  constructor(private trackService: TrackService) {
+  constructor(private trackService: TrackService, private playerService: PlayerService) {
     const socket = io('localhost:3000');
     socket.on('track', this.newTrack);
     socket.on('vote', this.newVote);
@@ -22,10 +23,16 @@ export class TracksComponent implements OnInit {
     this.getTracks();
   }
 
+  play(uri: string) {
+    this.playerService.play(uri).subscribe();
+  }
+
   getTracks() {
     this.trackService.getTracks().subscribe(
       (tracks: Track[]) => {
         this.tracks = tracks;
+        // TODO: add sorting to backend
+        this.sort();
         console.log(this.tracks);
       },
       (err: Error) => {
@@ -42,6 +49,7 @@ export class TracksComponent implements OnInit {
     for(let i = 0; i < this.tracks.length; i++) {
       if(this.tracks[i]._id == data._id) {
         this.tracks[i].votes = data.votes;
+        return this.sort();
       }
     }
   }
@@ -56,6 +64,7 @@ export class TracksComponent implements OnInit {
         track.upVoted = true;
         track.downVoted = false;
         track.isLoading = false;
+        this.sort();
       },
       (err) => {
         console.log(err);
@@ -74,11 +83,24 @@ export class TracksComponent implements OnInit {
         track.downVoted = true;
         track.upVoted = false;
         track.isLoading = false;
+        this.sort();
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  sort() {
+    for(let i = 0; i < this.tracks.length; i++) {
+      for(let j = 0; j < this.tracks.length; j++) {
+        if(this.tracks[i].votes > this.tracks[j].votes) {
+          let temp = this.tracks[i];
+          this.tracks[i] = this.tracks[j];
+          this.tracks[j] = temp;
+        }
+      }
+    }
   }
 
 }
