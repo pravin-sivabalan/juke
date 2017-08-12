@@ -14,8 +14,12 @@ export class Socket {
     });
   }
 
-  emitTrack(track: ITrack) {
-    this._socket.emit('track', track);
+  emitAddTrack(track: ITrack) {
+    this._socket.emit('add track', track);
+  }
+
+  emitDeleteTrack(trackId: string) {
+    this._socket.emit('delete track', trackId);
   }
 
   emitVote(id: string, votes: number) {

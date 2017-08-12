@@ -28,7 +28,7 @@ track.patch('/:id', (req: Request, res: Response) => {
   Track.findByIdAndUpdate(req.params.id, {$set: updatedObj}, (err: Error, track: ITrack) => {
     if(err) return res.sendStatus(500);
     return res.json(track);
-  })
+  });
 })
 
 track.post('/', (req: Request, res: Response) => {
@@ -38,7 +38,7 @@ track.post('/', (req: Request, res: Response) => {
     const track = _.clone(req.body);
     track._id = newTrack._id;
     track.votes = 0;
-    socket.emitTrack(track);
+    socket.emitAddTrack(track);
     return res.sendStatus(204);
   });
 });
@@ -46,6 +46,7 @@ track.post('/', (req: Request, res: Response) => {
 track.delete('/:id', (req: Request, res: Response) => {
   Track.findByIdAndRemove(req.params.id, (err: Error) => {
     if(err) return res.sendStatus(500);
+    socket.emitDeleteTrack(req.params.id);
     return res.sendStatus(204);
   })
 });

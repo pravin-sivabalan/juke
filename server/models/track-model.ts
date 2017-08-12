@@ -9,6 +9,8 @@ export interface ITrack {
   albumArt: string,
   duation: Number,
   votes: number,
+  played: boolean,
+  _id?: string,
   upVotedUsers?: String[],
   downVotedUsers?: String[],
   upVoted?: boolean,
@@ -49,8 +51,14 @@ export const TrackSchema = new mongoose.Schema({
     default: []
   },
   votes: {
-    type: Number, default: 0
+    type: Number,
+    default: 0
+  },
+  played: {
+    type: Boolean,
+    default: false
   }
+
 });
 
 export const Track = mongoose.model<ITrack>('Track', TrackSchema, 'track');
