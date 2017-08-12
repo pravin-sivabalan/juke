@@ -35,7 +35,12 @@ exports.TrackSchema = new mongoose.Schema({
         default: []
     },
     votes: {
-        type: Number, default: 0
+        type: Number,
+        default: 0
+    },
+    played: {
+        type: Boolean,
+        default: false
     }
 });
 exports.Track = mongoose.model('Track', exports.TrackSchema, 'track');

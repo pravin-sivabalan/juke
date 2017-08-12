@@ -39,7 +39,7 @@ exports.track.post('/', function (req, res) {
         var track = _.clone(req.body);
         track._id = newTrack._id;
         track.votes = 0;
-        socket_1.socket.emitTrack(track);
+        socket_1.socket.emitAddTrack(track);
         return res.sendStatus(204);
     });
 });
@@ -47,6 +47,7 @@ exports.track.delete('/:id', function (req, res) {
     index_1.Track.findByIdAndRemove(req.params.id, function (err) {
         if (err)
             return res.sendStatus(500);
+        socket_1.socket.emitDeleteTrack(req.params.id);
         return res.sendStatus(204);
     });
 });

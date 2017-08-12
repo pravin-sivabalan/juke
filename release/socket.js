@@ -10,8 +10,11 @@ var Socket = (function () {
             console.log('client connected');
         });
     };
-    Socket.prototype.emitTrack = function (track) {
-        this._socket.emit('track', track);
+    Socket.prototype.emitAddTrack = function (track) {
+        this._socket.emit('add track', track);
+    };
+    Socket.prototype.emitDeleteTrack = function (trackId) {
+        this._socket.emit('delete track', trackId);
     };
     Socket.prototype.emitVote = function (id, votes) {
         this._socket.emit('vote', {
