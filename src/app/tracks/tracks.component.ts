@@ -15,16 +15,19 @@ export class TracksComponent implements OnInit {
 
   constructor(private trackService: TrackService, private playerService: PlayerService) {
     const socket = io('localhost:3000');
-    socket.on('track', this.newTrack);
-    socket.on('vote', this.newVote);
+    socket.on('add track', (track: Track) => {
+      this.newTrack(track);
+    });
+    socket.on('delete track', (trackId: string) => {
+      this.deleteTrack(trackId);
+    });
+    socket.on('vote', (data) => {
+      this.newVote(data);
+    });
   }
 
   ngOnInit() {
     this.getTracks();
-  }
-
-  play(uri: string) {
-    this.playerService.play(uri).subscribe();
   }
 
   getTracks() {
@@ -33,7 +36,6 @@ export class TracksComponent implements OnInit {
         this.tracks = tracks;
         // TODO: add sorting to backend
         this.sort();
-        console.log(this.tracks);
       },
       (err: Error) => {
         console.log(err);
@@ -43,6 +45,14 @@ export class TracksComponent implements OnInit {
 
   newTrack(track: Track) {
     this.tracks.push(track);
+  }
+
+  deleteTrack(trackId: string) {
+    for(let i = 0; i < this.tracks.length; i++) {
+      if(trackId === this.tracks[i]._id) {
+        return this.tracks.splice(i, 1);
+      }
+    }
   }
 
   newVote(data: any) {
