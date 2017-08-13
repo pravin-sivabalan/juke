@@ -7,6 +7,8 @@ import { MdAutocompleteModule } from '@angular/material';
 import { MdInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { AuthGuardService } from '../shared/services/auth-guard.service';
+import { AuthService } from '../shared/services/auth.service';
 
 import { SearchComponent } from '../search/search.component';
 import { TracksComponent } from '../tracks/tracks.component';
@@ -26,7 +28,7 @@ import { TracksComponent } from '../tracks/tracks.component';
     BrowserAnimationsModule,
     MdInputModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AuthGuardService, AuthService],
   exports: [DashboardComponent]
 })
 export class DashboardModule { }
