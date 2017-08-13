@@ -10,12 +10,13 @@ export class AuthService {
 
   refreshToken() {
     this.http.get('/api/auth/refresh').subscribe(
-     (response: Response) => {
-        console.log('refresh token');
-     },
-     (err) => {
+      (response: Response) => {
+        console.log('refreshed token');
+      },
+      (err) => {
         console.log('Error: ' + err);
-     });
+      }
+    );
   }
 
   joinRoom(room: String, username: String) {
@@ -27,6 +28,12 @@ export class AuthService {
          console.log('Error: ' + err);
       }
     );
+  }
+
+  isLoggedIn() {
+    return this.http.get('/api/auth/isLoggedIn')
+    .map((res: Response) => res.json())
+    .catch((err: Error) => Observable.throw('Error authenticating'));
   }
 
 }
