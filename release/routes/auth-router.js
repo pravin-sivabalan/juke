@@ -21,9 +21,21 @@ exports.auth.get('/create', function (req, res) {
 exports.auth.post('/join', function (req, res) {
     if (!req.body.username || !req.body.room)
         return res.sendStatus(400);
-    req.session.username = req.body.username;
-    req.session.room = req.body.room;
-    return res.json(204);
+    room_model_1.Room.findOne({ code: req.body.room }, function (err, room) {
+        if (err || !room)
+            return res.sendStatus(404);
+        req.session.username = req.body.username;
+        req.session.room = req.body.room;
+        res.sendStatus(204);
+    });
+});
+exports.auth.get('/isLoggedIn', function (req, res) {
+    if (req.session.username || req.session.room) {
+        res.json({ isLoggedIn: true });
+    }
+    else {
+        res.json({ isLoggedIn: false });
+    }
 });
 exports.auth.get('/refresh', function (req, res) {
     if (req.session.refresh_token) {
