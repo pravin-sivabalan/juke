@@ -20,9 +20,21 @@ auth.get('/create', (req: Request, res: Response) => {
 
 auth.post('/join', (req: Request, res: Response) => {
   if(!req.body.username || !req.body.room) return res.sendStatus(400);
-  req.session.username = req.body.username;
-  req.session.room = req.body.room;
-  return res.json(204);
+  Room.findOne({code: req.body.room}, (err: Error, room: IRoom) => {
+      if(err || !room) return res.sendStatus(404);
+      req.session.username = req.body.username;
+      req.session.room = req.body.room;
+      res.sendStatus(204);
+  });
+});
+
+auth.get('/isLoggedIn', (req: Request, res: Response) => {
+  if(req.session.username || req.session.room) {
+      res.json({isLoggedIn: true});
+  } else {
+      res.json({isLoggedIn: false});
+  }
+
 });
 
 auth.get('/refresh', (req: Request, res: Response) => {
