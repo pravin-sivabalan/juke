@@ -52,6 +52,7 @@ function play(roomCode: string) {
       }
       if(err) return;
       request.put(options, (error: Error, response: any, body: any) => {
+        console.log((new Date).toISOString() + ' ' + playingTrack.uri);
         if(error || response.statusCode != 204) return;
         Track.find({played: true}, (err: Error, tracks: ITrack[]) => {
           if(err) return;
@@ -65,6 +66,7 @@ function play(roomCode: string) {
           }
           playingTrack.played = true;
           Track.findByIdAndUpdate(playingTrack._id, {$set: playingTrack}, (err: Error, track: ITrack) => {
+            if(err || !track) return;
             _.delay(play, playingTrack.duration, roomCode);
           });
         });
