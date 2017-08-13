@@ -17,8 +17,7 @@ export class LoginComponent implements OnInit {
     this.loggingIn = false;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   login(action: string) {
     this.loggingIn = true;
