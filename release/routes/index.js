@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var bodyParser = require("body-parser");
 var session = require("express-session");
+var morgan = require("morgan");
 var auth_router_1 = require("./auth-router");
 var track_router_1 = require("./track-router");
 var player_router_1 = require("./player-router");
@@ -20,6 +21,7 @@ exports.app.use(require('express-session')({
     saveUninitialized: true
 }));
 exports.app.use(bodyParser.json());
+exports.app.use(morgan('dev'));
 exports.app.use('/api/auth', auth_router_1.auth);
 exports.app.use('/api/tracks', track_router_1.track);
 exports.app.use('/api/player', player_router_1.player);
