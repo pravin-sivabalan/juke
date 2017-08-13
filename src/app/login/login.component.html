@@ -1,10 +1,15 @@
-<button *ngIf="!loggingIn" (click)="login('create')">Create Room</button>
-<button *ngIf="!loggingIn" (click)="login('join')">Join Room</button>
-<div *ngIf="loggingIn">
-  <p>Room: </p>
-  <input #room>
-  <p>Username: </p>
-  <input #username>
-  <br>
-  <button (click)="submit(room.value, username.value)">Login</button>
+<div class="container">
+  <h1>Juke</h1>
+  <div class="login">
+    <button *ngIf="!loggingIn" (click)="login('create')">Create Room</button>
+    <button *ngIf="!loggingIn" (click)="login('join')">Join Room</button>
+    <div *ngIf="loggingIn">
+      <p>Room: </p>
+      <input #room>
+      <p class="username">Username: </p>
+      <input #username>
+      <br>
+      <button (click)="submit(room.value, username.value)">Login</button>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,59 @@
+.container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  font-style: bold;
+  font-size: 4rem;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+@media (min-width:961px) {
+  .login {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.login p {
+  margin-left: 15px;
+}
+
+input {
+  width: 260px;
+  margin: 10px;
+  margin-left: 15px;
+  height: 30px;
+  font-size: 15px;
+  padding-left: 10px;
+  outline-color: red;
+}
+
+
+button {
+  outline: none;
+  color: #ffffff;
+  background: #ec6962;
+  display: block;
+  font-size: 1rem;
+  padding: 10px 20px 10px 20px;
+  border-color: inherit;
+  border: none;
+  margin: 15px;
+  width: 275px;
+
+ transition:.5s;
+  -o-transition:.5s;
+ -ms-transition:.5s;
+ -moz-transition:.5s;
+ -webkit-transition:.5s;
+
+}
+
+button:hover {
+  background: #e8524b;
+}
