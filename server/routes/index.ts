@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
+import * as morgan from 'morgan'
 import { Express } from 'express';
 import { auth } from './auth-router';
 import { track } from './track-router';
@@ -21,6 +22,7 @@ app.use(require('express-session')({
   saveUninitialized: true
 }));
 app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 app.use('/api/auth', auth);
 app.use('/api/tracks', track);
