@@ -9,33 +9,10 @@ export class PlayerService {
 
   constructor(private http :Http) { }
 
-  play(uri: string) {
-    return this.http.put('/api/player/play', {uri: uri})
+  play() {
+    return this.http.get('/api/player/start')
       .map((res: Response) => res.json())
       .catch((err: Error) => Observable.throw('Error playing music'));
   }
-
-  getTracks(): Observable<Track[]> {
-    return this.http.get('/api/tracks')
-      .map((res: Response) => res.json())
-      .catch((err: Error) => Observable.throw('Error fetching tracks'));
-  }
-
-  postTrack(track: Track) {
-    return this.http.post('/api/tracks', track);
-  }
-
-  upVoteTrack(id: string) {
-    return this.http.get('/api/tracks/upvote/' + id)
-      .map((res: Response) => res.json())
-      .catch((err: Error) => Observable.throw('Error voting'));
-  }
-
-  downVoteTrack(id: string) {
-    return this.http.get('/api/tracks/downvote/' + id)
-      .map((res: Response) => res.json())
-      .catch((err: Error) => Observable.throw('Error voting'));
-  }
-
 
 }
