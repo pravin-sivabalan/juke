@@ -22,7 +22,6 @@ gulp.task('compile', ['build'], function() {
         "./custom-typings/**/*.d.ts",
         "./node_modules/@types/**/*.d.ts"
     ]).pipe(tsProject());
-
 	return merge([
     tsResult.js.pipe(gulp.dest('release'))
 	]);
